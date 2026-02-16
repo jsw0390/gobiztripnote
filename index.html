@@ -139,7 +139,13 @@
 }
     @keyframes pop{from{transform:translateY(6px); opacity:.8} to{transform:none; opacity:1}}
     .view-switch { display:flex; gap:6px; align-items:center; margin:0 0 8px 0; }
-    .calendar-grid { display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      /* wider cells → allow horizontal scroll on smaller screens */
+      min-width: 980px;
+    }
     .calendar-header{
       display:grid;
       grid-template-columns:repeat(7,1fr);
@@ -153,10 +159,37 @@
       padding:4px 0;
     }
     .calendar-cell{
-      background:#fff; border:1px solid var(--border); border-radius:14px;
-      padding:10px; min-height:90px; display:flex; flex-direction:column; gap:6px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      min-height:260px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
     }
     .calendar-cell .cell-date{ font-size:12px; color:var(--muted); }
+    /* titles area inside week/month cells */
+    .calendar-titles{
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 4px;
+      border-top: 1px dashed var(--border);
+      margin-top: 6px;
+      padding-top: 6px;
+    }
+    .calendar-titles p{
+      margin: 6px 0 0 0;
+      font-size: 13px;
+      line-height: 1.25;
+      word-break: break-word;
+    }
+
+    /* allow horizontal scroll for calendar on narrow screens */
+    #calendarView{
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
     .calendar-chip{ display:inline-flex; gap:6px; flex-wrap:wrap; }
     .calendar-chip .badge{ margin-right:0; }
     .hidden{ display:none !important; }
@@ -410,7 +443,73 @@
       "2027-09-14": "추석 연휴",
       "2027-09-15": "추석",
       "2027-09-16": "추석 연휴",
-      "2027-10-04": "대체공휴일(개천절)"
+      "2027-10-04": "대체공휴일(개천절)",
+
+      // === 2028년 ===
+      "2028-01-26": "설날 연휴",
+      "2028-01-27": "설날",
+      "2028-01-28": "설날 연휴",
+      "2028-05-02": "부처님오신날",
+      "2028-10-02": "추석 연휴",
+      "2028-10-03": "추석",
+      "2028-10-04": "추석 연휴",
+      "2028-10-05": "대체공휴일(추석)",
+
+      // === 2029년 ===
+      // TODO: 2029년 설날/추석/부처님오신날 및 대체공휴일 날짜를 확정해서 아래에 추가하세요.
+      // 예)
+      "2029-02-12": "설날 연휴",
+      "2029-02-13": "설날",
+      "2029-02-14": "설날 연휴",
+      "2029-05-20": "부처님오신날",
+      "2029-05-21": "부처님오신날 대체공휴일",
+      "2029-09-21": "추석 연휴",
+      "2029-09-22": "추석",
+      "2029-09-23": "추석 연휴",
+      "2029-09-24": "추석 대체공휴일",
+
+      // === 2030년 ===
+      "2030-02-02": "설날 연휴",
+      "2030-02-03": "설날",
+      "2030-02-04": "설날 연휴",
+      "2030-03-04": "대체공휴일(삼일절)",
+      "2030-05-06": "대체공휴일(어린이날)",
+      "2030-05-09": "부처님오신날",
+      "2030-09-11": "추석 연휴",
+      "2030-09-12": "추석",
+      "2030-09-13": "추석 연휴",
+      "2030-10-04": "대체공휴일(개천절)",
+
+      // === 2031년 ===
+      "2031-01-22": "설날 연휴",
+      "2031-01-23": "설날",
+      "2031-01-24": "설날 연휴",
+      "2031-01-27": "대체공휴일(설날)",
+      "2031-05-28": "부처님오신날",
+      "2031-05-29": "대체공휴일(부처님오신날)",
+      "2031-06-09": "대체공휴일(현충일)",
+      "2031-08-18": "대체공휴일(광복절)",
+      "2031-10-06": "추석 연휴",
+      "2031-10-07": "추석",
+      "2031-10-08": "추석 연휴",
+      "2031-10-09": "대체공휴일(추석)",
+      "2031-10-10": "대체공휴일(한글날)",
+
+      // === 2032년 ===
+      "2032-02-10": "설날 연휴",
+      "2032-02-11": "설날",
+      "2032-02-12": "설날 연휴",
+      "2032-05-16": "부처님오신날",
+      "2032-05-17": "대체공휴일(부처님오신날)",
+      "2032-08-16": "대체공휴일(광복절)",
+      "2032-09-18": "추석 연휴",
+      "2032-09-19": "추석",
+      "2032-09-20": "추석 연휴",
+      "2032-09-21": "대체공휴일(추석)",
+      "2032-10-04": "대체공휴일(개천절)",
+      "2032-10-11": "대체공휴일(한글날)",
+      "2032-12-27": "대체공휴일(성탄절)"
+    }
 
       // === 필요 시 2024, 2028년 이후 공휴일을 아래에 계속 추가하세요. ===
       // 예)
@@ -421,7 +520,7 @@
       // "2024-09-17": "추석",
       // "2024-09-18": "추석 연휴",
       // ...
-    };
+    
     function getHolidayLabel(dateStr){
       if(!dateStr) return "";
       // 먼저 연도별 개별 지정 공휴일 확인
@@ -624,8 +723,8 @@ try {
     let calendarAnchor = new Date();
 
     // --- Shared config for week/month cells ---
-    const WEEK_MAX_TITLES = 8;   // 주간: 셀에 표시할 최대 제목 수
-    const MONTH_MAX_TITLES = 5;  // 월간: 셀에 표시할 최대 제목 수
+    const WEEK_MAX_TITLES = 999;   // 주간: 최대 제목 수 (셀 내부 스크롤로 전부 표시)
+    const MONTH_MAX_TITLES = 999;  // 월간: 최대 제목 수 (셀 내부 스크롤로 전부 표시)
 
     // 일간 리스트와 동일한 정렬 우선순위 (미완료 우선 → 우선순위↑ → 중요도↓ → 시작시간↑ → 생성일↓)
     function compareItems(a, b){
@@ -642,17 +741,17 @@ try {
 
     // 주간/월간용 필터 + 검색 매칭 함수
     function matchesWeeklyMonthly(it){
-      const q = (queryInput.value || "").toLowerCase();
-      const f = (filterSelect.value || 'all');
-      // 상태 필터
-      if (f === 'open' && it.done) return false;
-      if (f === 'done' && !it.done) return false;
-      // 검색어 필터
-      if (q){
-        const hay = `${it.title||''} ${it.memo||''} ${it.tags||''}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      return true;
+      const q = (queryInput.value || "").toLowerCase().trim();
+      const filter = filterSelect.value;
+
+      // 상태 필터(전체/미완료/완료)
+      if (filter === 'open' && it.done) return false;
+      if (filter === 'done' && !it.done) return false;
+
+      // 검색어 필터(제목/메모/태그)
+      if (!q) return true;
+      const hay = `${it.title || ''} ${it.memo || ''} ${it.tags || ''}`.toLowerCase();
+      return hay.includes(q);
     }
 
     // 현재 보기 모드에 맞춰 다시 그리는 헬퍼
@@ -701,10 +800,15 @@ try {
         const open = document.createElement('span'); open.className = 'badge'; open.textContent = `미완료 ${dayFiltered.filter(x=>!x.done).length}`;
         chips.appendChild(total); chips.appendChild(done); chips.appendChild(open);
         cell.appendChild(chips);
+        // Title area with scroll
+        const titlesWrap = document.createElement('div');
+        titlesWrap.className = 'calendar-titles';
         sorted.slice(0, WEEK_MAX_TITLES).forEach(it=>{
-          const p=document.createElement('p'); p.style.margin='4px 0 0 0'; p.style.fontSize='12px'; p.textContent = it.title;
-          cell.appendChild(p);
+          const p = document.createElement('p');
+          p.textContent = it.title;
+          titlesWrap.appendChild(p);
         });
+        cell.appendChild(titlesWrap);
         cell.addEventListener('click', ()=>{
           dateInput.value = ds;
           switchMode(VIEW_MODES.DAY);
@@ -795,14 +899,15 @@ try {
 
         cell.appendChild(chips);
 
-        // 최대 N개 업무 제목 표시 (filtered/sorted)
+        // Title area with scroll
+        const titlesWrap = document.createElement('div');
+        titlesWrap.className = 'calendar-titles';
         sorted.slice(0, MONTH_MAX_TITLES).forEach(it => {
           const p = document.createElement('p');
-          p.style.margin = '4px 0 0 0';
-          p.style.fontSize = '12px';
           p.textContent = it.title;
-          cell.appendChild(p);
+          titlesWrap.appendChild(p);
         });
+        cell.appendChild(titlesWrap);
 
         // 셀 클릭 시 해당 날짜를 일간 모드로 전환
         cell.addEventListener('click', () => {
@@ -1177,30 +1282,39 @@ if (memoInputEl) {
     function render(){
       const date = dateInput.value;
       const filter = filterSelect.value;
-      const q = (queryInput.value || "").toLowerCase();
+      const q = (queryInput.value || "").toLowerCase().trim();
+      const isGlobalSearch = !!q;
 
       // 오늘 선택된 날짜가 공휴일이면 상단에 뱃지로 표시
+      // (검색 중에는 여러 날짜가 섞이므로 뱃지는 숨김)
       if (todayHolidayEl) {
-        const holidayName = getHolidayLabel(date);
-        if (holidayName) {
-          todayHolidayEl.textContent = holidayName;
-          todayHolidayEl.style.display = 'inline-flex';
-        } else {
+        if (isGlobalSearch) {
           todayHolidayEl.style.display = 'none';
+        } else {
+          const holidayName = getHolidayLabel(date);
+          if (holidayName) {
+            todayHolidayEl.textContent = holidayName;
+            todayHolidayEl.style.display = 'inline-flex';
+          } else {
+            todayHolidayEl.style.display = 'none';
+          }
         }
       }
 
-      // 1) step: item-level filter ONLY by date and query (ignore done/open here)
+      // 1) step: item-level filter by date (only when not searching) + query
+      // - 검색어 없음: 선택된 날짜만
+      // - 검색어 있음: 전체 날짜에서 검색
       const dateQueryFiltered = items.filter(it => {
         const d = it.date || '';
         const currentDate = dateInput.value || toYYYYMMDD();
-        // 날짜 조건: 항상 현재 dateInput.value 만 사용
-        if (d !== currentDate) return false;
-        // 검색어 조건
+
+        if (!isGlobalSearch) {
+          if (d !== currentDate) return false;
+        }
+
         if (!q) return true;
-        return (it.title||"").toLowerCase().includes(q) ||
-               (it.memo||"").toLowerCase().includes(q) ||
-               (it.tags||"").toLowerCase().includes(q);
+        const hay = `${it.title || ''} ${it.memo || ''} ${it.tags || ''}`.toLowerCase();
+        return hay.includes(q);
       });
 
       // 2) build map of all items by groupId (use all items, not just filtered)
